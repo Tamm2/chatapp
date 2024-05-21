@@ -1,0 +1,70 @@
+/*
+.index-buttons {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.index-button {
+    display: block;
+    width: 30%;
+    text-align: center;
+    margin: 1rem auto;
+    padding: 2% 0%;
+    border-radius: 10px;
+    border: solid 1px #9b9b9b;
+    font-size: 1rem;
+    color:red;
+}
+*/
+
+/* 全体のスタイリングと背景 */
+body {
+    font-family: 'Arial', sans-serif; /* フォントファミリーを設定 */
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* 画面の高さ全体を使用 */
+    display: flex;
+    background-color: #f8f8f8; /* 背景色 */
+    justify-content: center; /* 中央揃え */
+    align-items: center; /* 垂直中央揃え */
+}
+
+/* ボタンを含むdivコンテナのスタイリング */
+.index-buttons {
+    text-align: center;
+    width: 300px; /* コンテナの幅 */
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 影の追加 */
+    border-radius: 8px; /* 角を丸く */
+    display: flex; /* フレックスボックスを使用 */
+    flex-direction: column; /* 子要素を縦方向に配置 */
+    gap: 10px; /* ボタン間の隙間 */
+    justify-content: center; /* 中央揃え */
+    align-items: center; /* 垂直中央揃え */
+}
+
+/* 各ボタンのスタイリング */
+.index-button {
+    padding: 10px 20px;
+    color: white; /* テキストの色 */
+    background-color: #007bff; /* ボタンの背景色 */
+    border: none;
+    border-radius: 5px; /* ボタンの角を丸く */
+    text-decoration: none; /* 下線を消す */
+    transition: background-color 0.3s; /* 背景色の変化を滑らかに */
+    width: 100%; /* コンテナの幅に合わせる */
+}
+
+/* ボタンにホバーしたときのスタイル */
+.index-button:hover {
+    background-color: #0056b3; /* ホバー時の背景色 */
+}
+
+/* ボタンをクリックしたときのスタイル */
+.index-button:active {
+    background-color: #004085; /* アクティブ時の背景色 */
+}

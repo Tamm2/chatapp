@@ -1,0 +1,31 @@
+.header{
+    padding:0;
+    margin:0;
+    background-color:  gainsboro;
+}
+
+.setting_title{
+    color:aquamarine;
+    text-align: center;
+    margin:0;
+    height:80px;
+    font-size: 36px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.setting-button {
+    display: block;
+    width: 30%;
+    text-align: center;
+    text-decoration: none;
+    margin: 2rem auto;
+    padding: 2% 0%;
+    border-radius: 10px;
+    border: solid 1px #9b9b9b;
+    font-size: 1rem;
+    color: #000;
+}

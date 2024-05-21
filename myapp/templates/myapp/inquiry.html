@@ -1,0 +1,17 @@
+{% extends "myapp/base.html"%}
+{% block header %}
+    <title>{% block title %}お問合せ{% endblock %}</title>
+{% endblock %}
+{% block content %}
+<body>
+    <h1>お問い合わせフォーム</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_name">お名前:</label>
+        <input type="text" id="id_name" name="name"><br><br>
+        <label for="id_message">お問い合わせ内容:</label><br>
+        <textarea id="id_message" name="message" rows="4" cols="50"></textarea><br><br>
+        <button type="submit">送信</button>
+    </form>
+</body>
+{% endblock %}

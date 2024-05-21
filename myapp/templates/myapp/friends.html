@@ -1,0 +1,37 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'myapp/css/friends.css' %}">
+{% endblock %}
+{% block header %}
+<div class="header">
+    {% block header_title %}
+    <h2 class="friend_list_title">友達一覧</h2>
+    {% endblock %}
+</div>
+{% endblock %}
+
+{% block content %}
+<form method="GET" action="{% url 'friends' %}">
+    {{ search_form.as_p }}
+    <button type="submit">検索</button>
+</form>
+<ul class="friend_list">
+    
+    {% for friend, talk, time in info %}
+    <div class="friend-indivi">
+        <a class="friend-list__link" href="{% url 'talk_room' friend.id %}">
+            <li>
+                <img class="friend_usericon" src="{{ friend.image.url }}">
+                <div class="username">
+                    {{ friend.username }}:
+                </div>
+                <div class="talk">
+                    {{ talk }}
+                </div>
+            </li>
+        </a>
+    </div>
+    {% endfor %}
+</ul>
+{% endblock %}

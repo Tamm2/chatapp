@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}ユーザー名変更{% endblock %}</title>
+</head>
+<body>
+    <h1>ユーザー名変更</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.label_tag.as_p }}
+        {{ form.as_p }}
+        <button type="submit">変更</button>
+    </form>
+</body>
+</html>

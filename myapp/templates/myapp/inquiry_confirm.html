@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>お問い合わせ内容確認</title>
+</head>
+<body>
+    <h1>お問い合わせ内容確認</h1>
+    <p>以下の内容でお問い合わせを送信します。よろしいですか？</p>
+    <p><strong>お名前:</strong> {{ name }}</p>
+    <p><strong>お問い合わせ内容:</strong> {{ message }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="confirm" value="confirm">送信</button>
+        <button type="submit" name="back" value="back">戻る</button>
+    </form>
+</body>
+</html>

@@ -9,7 +9,6 @@ body{
 /* ヘッダー */
 .header{
     width: 100vw;
-    height: 64px;
     border-bottom: solid 1px #9b9b9b;
 }
 .header-container{

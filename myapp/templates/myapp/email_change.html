@@ -1,0 +1,15 @@
+{% extends "myapp/base.html"%}
+{% block header %}
+    <title>{% block title %}メールアドレス変更{% endblock %}</title>
+{% endblock %}
+{% block content %}
+<body>
+    <h1>メールアドレス変更</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.labels.as_p }}
+        {{ form.as_p }}
+        <button type="submit">メールアドレス変更</button>
+    </form>
+</body>
+{% endblock %}

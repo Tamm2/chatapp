@@ -1,0 +1,43 @@
+.header{
+    padding:0;
+    margin:0;
+    background-color:  gainsboro;;
+}
+
+.friend_list_title {
+    color:blue;
+    text-align: center;
+    margin:0;
+    height:80px;
+    font-size: 36px;
+}
+
+
+.friend_list{
+    padding:0;
+    margin:0;
+}
+.friend-indivi li {
+    display: flex; /* 横並びにする */
+    align-items: center; /* 垂直方向の中央揃え */
+    height: 50px; /* 高さを50pxに設定 */
+    border: 1px solid #ccc; /* ボーダーを薄い灰色に設定 */
+    padding:0;
+    margin:0;
+    height: 60px;
+}
+
+.friend-indivi li .friend_usericon {
+    width: 50px; /* ユーザーアイコンの幅 */
+    height: 50px; /* 高さは自動調整 */
+    margin-right: 10px; /* ユーザーアイコンとユーザー名の間隔 */
+    border-radius: 50%;  /* 円形のアイコンに */
+}
+
+.friend-indivi li .username {
+    font-weight: bold; /* ユーザー名を太字にする */
+}
+
+.friend-indivi li .talk {
+    flex-grow: 1; /* 残りのスペースを全て使う */
+}

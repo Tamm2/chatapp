@@ -1,1 +1,48 @@
-TR
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'myapp/css/talk_room.css' %}">
+{% endblock %}
+{% block header %}
+<div class="header">
+<div class="friend-name">
+{{ friend.username }}
+</div>
+{% block talk_room %}
+    <a href="{% url 'friends' %}" class="talk_room__back">戻る</a>
+    <a href="" class="talk_room__reload">更新</a>
+    {% endblock %}
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="talk_room">
+    <!-- トークの表示部分 -->
+    <ul class="chatboard" id="chatboard">
+
+        {% for talk in talks %}
+        <li class="chatboard__content">
+        <div class="chatboard__profile">
+            <img class="chatboard__icon" src="{{ friend.image.url }}">
+            <p class="chatboard__name">{{ talk.talk_from.username }}</p>
+        </div>
+        <p class="chatboard__text">{{ talk.talk }}</p>
+        <p class="chatboard__time">{{ talk.time|date:"m/d" }}<br>{{ talk.time|date:"H:i" }}</p>
+    </li>
+{% endfor %}
+
+    </ul>
+
+    <!-- トークの送信部分 -->
+    <form class="talk_room__sendbox" method="POST">
+        {% csrf_token %}
+        {{ form.talk }}
+        <button class="talk_room__sendbox-btn" type="submit">送信</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
