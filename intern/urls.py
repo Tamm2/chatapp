@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-#from allauth_2fa.views import TwoFactorSetup,TwoFactorRemove
+from allauth_2fa.views import TwoFactorSetup,TwoFactorRemove
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('myapp.urls')),
     path('accounts/', include('allauth.urls')),
+    path('accounts/two-factor-setup/', TwoFactorSetup.as_view(), name='two-factor-setup'),
+    path('accounts/two-factor-remove/', TwoFactorRemove.as_view(), name='two-factor-remove'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
