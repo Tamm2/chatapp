@@ -23,6 +23,8 @@ import operator
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
 from .models import Inquiry
+from allauth.account.views import LoginView as AllauthLoginView
+from allauth.account.forms import LoginForm
 
 def index(request):
     return render(request, "myapp/index.html")
@@ -69,7 +71,7 @@ def signup_view(request):
     }
     return render(request, "myapp/signup.html", context)
 
-class Login(LoginView):
+class Login(AllauthLoginView):
     authentication_form = LoginForm
     template_name = "myapp/login.html"
 
