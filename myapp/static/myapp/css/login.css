@@ -32,3 +32,9 @@
     color: #000;
     background-color: #fff;
 }
+
+.header{
+    text-align: center;
+    font-size:64px;
+    color:red;
+}

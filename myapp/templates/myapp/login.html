@@ -1,11 +1,10 @@
-{% extends "myapp/base.html" %}
 {% load static %}
 
 {% block extra_style %}
 <link rel="stylesheet" href="{% static 'myapp/css/login.css' %}">
 {% endblock %}
 
-{% block header-title %}ログイン{% endblock %}
+{% block header-title %}<div class="header">ログイン</div>{% endblock %}
 
 {% block content %}
 {% if form.errors  %}
@@ -26,7 +25,9 @@
         {{ form.password.errors }}
     </div>
     <button type="submit" class="login-form__submit">ログイン</button>
+    <a href="{% url 'index' %}">戻る</a>
 </form>
+
 {% endblock %}
 
 {% block footer %}{% endblock %}

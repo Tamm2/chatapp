@@ -8,11 +8,9 @@
 <div class="header">
 <div class="friend-name">
 {{ friend.username }}
+<a href="{% url 'friends' %}" class="talk_room__back">戻る</a>
+<a href="" class="talk_room__reload">更新</a>
 </div>
-{% block talk_room %}
-    <a href="{% url 'friends' %}" class="talk_room__back">戻る</a>
-    <a href="" class="talk_room__reload">更新</a>
-    {% endblock %}
 </div>
 {% endblock %}
 
@@ -25,7 +23,7 @@
         {% for talk in talks %}
         <li class="chatboard__content">
         <div class="chatboard__profile">
-            <img class="chatboard__icon" src="{{ friend.image.url }}">
+            <img class="chatboard__icon" src="{{ talk.talk_from.image.url }}">
             <p class="chatboard__name">{{ talk.talk_from.username }}</p>
         </div>
         <p class="chatboard__text">{{ talk.talk }}</p>

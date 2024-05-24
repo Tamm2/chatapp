@@ -1,11 +1,10 @@
-{% extends "myapp/base.html" %}
 {% load static %}
 
 {% block extra_style %}
 <link rel="stylesheet" href="{% static 'myapp/css/signup.css' %}">
 {% endblock %}
 
-{% block header-title %}会員登録{% endblock %}
+{% block header-title %}<div class="header">会員登録</div>{% endblock %}
 
 {% block content %}
 {# signup処理部分 #}
@@ -21,7 +20,10 @@
         {% endif %}
     </p>
     {% endfor %}
-    <button type="submit" class="signup-form__submit">Sign Up</button>
+    <button type="submit" class="signup-form__submit">登録</button>
+    <div class="back">
+        <a href="{% url 'index' %}">戻る</a>
+        </div>
 </form>
 
 {% endblock %}

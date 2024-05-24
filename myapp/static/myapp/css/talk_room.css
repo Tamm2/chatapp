@@ -6,6 +6,7 @@
     text-align: center;
     color:blueviolet;
     font-size:42px;
+    height:80px;
 }
 
 .talk_room__reload {
@@ -15,7 +16,7 @@
     position: absolute;
     right: 0;
     transform: translateY(-50%);
-    margin: auto;
+    margin: 20px;
     padding: 4px 8px;
     border: solid 2px #888;
     border-radius: calc(1.2rem - 4px);
@@ -29,7 +30,7 @@
     position: absolute;
     left: 0;
     transform: translateY(-50%);
-    margin: auto;
+    margin: 20px;
     padding: 4px 8px;
     border: solid 2px #888;
     border-radius: calc(1.2rem - 4px);
