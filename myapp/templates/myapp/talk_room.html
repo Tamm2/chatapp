@@ -25,7 +25,7 @@
         {% for talk in talks %}
         <li class="chatboard__content">
         <div class="chatboard__profile">
-            <img class="chatboard__icon" src="{{ friend.image.url }}">
+            <img class="chatboard__icon" src="{{ talk.talk_from.image.url }}">
             <p class="chatboard__name">{{ talk.talk_from.username }}</p>
         </div>
         <p class="chatboard__text">{{ talk.talk }}</p>

@@ -75,6 +75,10 @@ class Login(LoginView):
     authentication_form = LoginForm
     template_name = "myapp/login.html"
 
+
+def vertification(request):
+    return render(request,"myapp/vertification.html")
+
 def friends(request):
     info = []
     info_have_message = []

@@ -12,9 +12,19 @@ class newUserForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ("username","email","image")
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if CustomUser.objects.filter(email=email).exists():
+            raise forms.ValidationError('このメールアドレスは既に登録されています。')
+        return email
 
 class LoginForm(AuthenticationForm):
-    pass
+    otp_code = forms.CharField(label="OTP Code", required=False)
+    def clean(self):
+        cleaned_data = super().clean()
+        # OTPの検証ロジックをここに追加
+        return cleaned_data
 
 
 class TalkForm(forms.ModelForm):
