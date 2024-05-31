@@ -1,10 +1,11 @@
+{% extends "myapp/base.html" %}
 {% load static %}
 
 {% block extra_style %}
 <link rel="stylesheet" href="{% static 'myapp/css/login.css' %}">
 {% endblock %}
 
-{% block header-title %}<div class="header">ログイン</div>{% endblock %}
+{% block header-title %}ログイン{% endblock %}
 
 {% block content %}
 {% if form.errors  %}
@@ -15,7 +16,7 @@
 <form method="POST" action="{% url 'login_view' %}" class="login-form">
     {% csrf_token %}
     <div class="login-form__username">
-        <label>ユーザーネーム:</label>
+        <label>ユーザーネームまたはメールアドレス:</label>
         {{ form.username }}
         {{ form.username.errors }}
     </div>
@@ -25,9 +26,7 @@
         {{ form.password.errors }}
     </div>
     <button type="submit" class="login-form__submit">ログイン</button>
-    <a href="{% url 'index' %}">戻る</a>
 </form>
-
 {% endblock %}
 
 {% block footer %}{% endblock %}

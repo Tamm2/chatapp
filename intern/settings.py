@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-import environ 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -96,12 +95,8 @@ WSGI_APPLICATION = 'intern.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'chat_app',
-        'USER': 'ikuta',
-        'PASSWORD': 'chatapptamura',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -164,12 +159,3 @@ ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 DEFAULT_FROM_EMAIL = 'admin@example.com'
-
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-if os.path.isfile('.env'): # .envファイルが存在しない時にもエラーが発生しないようにする
-    env = environ.Env(DEBUG=(bool, False),)
-    environ.Env.read_env('.env')
-
-    DEBUG = env('DEBUG')
-    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
