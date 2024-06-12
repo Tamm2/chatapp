@@ -8,11 +8,9 @@
 <div class="header">
 <div class="friend-name">
 {{ friend.username }}
+<a href="{% url 'friends' %}" class="talk_room__back">戻る</a>
+<a href="" class="talk_room__reload">更新</a>
 </div>
-{% block talk_room %}
-    <a href="{% url 'friends' %}" class="talk_room__back">戻る</a>
-    <a href="" class="talk_room__reload">更新</a>
-    {% endblock %}
 </div>
 {% endblock %}
 

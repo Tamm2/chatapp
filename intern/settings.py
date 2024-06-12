@@ -170,9 +170,21 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 DEFAULT_FROM_EMAIL = 'admin@example.com'
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #EMAIL_HOST = 'smtp.sendgrid.net'
 ##EMAIL_USE_TLS = True
 #EMAIL_HOST_USER = 'apikey'
 #EMAIL_HOST_PASSWORD = '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'
+
+
+if os.path.isfile('.env'): # .envファイルが存在しない時にもエラーが発生しないようにする
+    env = environ.Env(DEBUG=(bool, False),)
+    environ.Env.read_env('.env')
+
+    DEBUG = env('DEBUG')
+    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+
+   
+  

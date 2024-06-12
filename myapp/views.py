@@ -101,7 +101,7 @@ def friends(request):
         if latest_message:
             info_have_message.append([friend, latest_message.talk, latest_message.time])
         else:
-            info_have_no_message.append([friend, None, None])
+            info_have_no_message.append([friend, "まだメッセージがありません", None])
     info_have_message = sorted(info_have_message, key=operator.itemgetter(2), reverse=True)
     
     info.extend(info_have_message)
