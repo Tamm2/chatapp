@@ -23,6 +23,8 @@ import operator
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
 from .models import Inquiry
+#from allauth.account.views import LoginView as AllauthLoginView
+#from allauth.account.forms import LoginForm
 
 def index(request):
     return render(request, "myapp/index.html")
@@ -39,7 +41,7 @@ def signup_view(request):
             # モデルフォームはformの値をmodelsにそのまま格納できるsave()メソッドがあるので便利。
             form.save()
             # フォームから"username"を読み取る
-            username = form.cleaned_data.get("username")
+            username = form.cleaned_data.get("email")
             # フォームから"password1"を読み取る
             password = form.cleaned_data.get("password1")
             # 認証情報のセットを検証するには authenticate() を利用してください。
@@ -72,6 +74,10 @@ def signup_view(request):
 class Login(LoginView):
     authentication_form = LoginForm
     template_name = "myapp/login.html"
+
+
+def vertification(request):
+    return render(request,"myapp/vertification.html")
 
 def friends(request):
     info = []

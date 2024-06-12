@@ -1,11 +1,10 @@
-{% extends "myapp/base.html" %}
+
 {% load static %}
 
 {% block extra_style %}
 <link rel="stylesheet" href="{% static 'myapp/css/login.css' %}">
 {% endblock %}
 
-{% block header-title %}ログイン{% endblock %}
 
 {% block content %}
 {% if form.errors  %}
