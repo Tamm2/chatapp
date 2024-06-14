@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from .forms import newUserForm
+from .forms import CustomSignupForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.views import(
     LoginView,
@@ -31,12 +31,12 @@ def index(request):
 
 def signup_view(request):
     if request.method == "GET":
-        form = newUserForm()
+        form = CustomSignupForm()
         error_message = ''
     elif request.method == "POST":
         # 画像ファイルをformに入れた状態で使いたい時はformに"request.FILES"を加える。
         # request.POST だけではNoneが入る。
-        form = newUserForm(request.POST, request.FILES)
+        form = CustomSignupForm(request.POST, request.FILES)
         if form.is_valid():
             # モデルフォームはformの値をmodelsにそのまま格納できるsave()メソッドがあるので便利。
             form.save()
