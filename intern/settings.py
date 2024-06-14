@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_otp',
     'django_otp.plugins.otp_totp',
     'django_otp.plugins.otp_static',
+    'debug_toolbar',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -71,6 +72,7 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware', 
     'django.middleware.csrf.CsrfViewMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'intern.urls'
@@ -91,6 +93,12 @@ TEMPLATES = [
         },
     },
 ]
+
+INTERNAL_IPS = [
+    # 127.0.0.1を追加（開発環境の場合）
+    '127.0.0.1',
+]
+
 
 WSGI_APPLICATION = 'intern.wsgi.application'
 

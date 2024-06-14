@@ -11,48 +11,54 @@ from .forms import (
 )
 from django.contrib.auth.decorators import login_required
 from .models import CustomUser,Talk,Inquiry
-from django.db.models import Q
+from django.db.models import OuterRef, Subquery, Max, Q
 import operator
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
+from django.db.models.functions import Coalesce
 
 def index(request):
     return render(request, "myapp/index.html")
 
 @login_required
 def friends(request):
-    info = []
-    info_have_message = []
-    info_have_no_message = []
     search_form = FriendSearchForm(request.GET)
-    if search_form.is_valid():
-        query = search_form.cleaned_data['query']
-        friends = CustomUser.objects.all().exclude(username=request.user.username)
-        
-        if query:
-            friends = friends.filter(username__icontains=query)
-    else:
-        friends = CustomUser.objects.all().exclude(username=request.user.username)
-    for friend in friends:
-        # 最新のメッセージの取得
-        latest_message = Talk.objects.filter(
-            Q(talk_from=request.user, talk_to=friend) | Q(talk_to=request.user, talk_from=friend)
-        ).order_by('time').last()
+    query = search_form.cleaned_data.get('query') if search_form.is_valid() else None
 
-        if latest_message:
-            info_have_message.append([friend, latest_message.talk, latest_message.time])
+    friends = CustomUser.objects.exclude(username=request.user.username)
+    
+    if query:
+        friends = friends.filter(Q(username__icontains=query) | Q(email__icontains=query))
+    
+    # Subquery to get the latest message for each friend
+    latest_message_subquery = Talk.objects.filter(
+        Q(talk_from=request.user, talk_to=OuterRef('pk')) | Q(talk_to=request.user, talk_from=OuterRef('pk'))
+    ).order_by('-time').values('talk')[:1]
+
+    # Subquery to get the latest message time for each friend
+    latest_time_subquery = Talk.objects.filter(
+        Q(talk_from=request.user, talk_to=OuterRef('pk')) | Q(talk_to=request.user, talk_from=OuterRef('pk'))
+    ).order_by('-time').values('time')[:1]
+
+    friends = friends.annotate(
+        latest_msg_talk=Coalesce(Subquery(latest_message_subquery), None),
+        latest_msg_time=Subquery(latest_time_subquery)
+    ).order_by('-latest_msg_time')
+
+    # Prepare info list for rendering
+    info = []
+    for friend in friends:
+        if friend.latest_msg_talk:
+            info.append([friend, friend.latest_msg_talk, friend.latest_msg_time])
         else:
-            info_have_no_message.append([friend, "まだメッセージがありません", None])
-    info_have_message = sorted(info_have_message, key=operator.itemgetter(2), reverse=True)
-    
-    info.extend(info_have_message)
-    info.extend(info_have_no_message)
-    
+            info.append([friend, "まだメッセージがありません", None])
+
     context = {
         "info": info,
         "search_form": search_form,
     }
-    return render(request, "myapp/friends.html",context)
+    return render(request, "myapp/friends.html", context)
+
 
 @login_required
 def talk_room(request, user_id):
@@ -60,7 +66,9 @@ def talk_room(request, user_id):
     user = request.user
     friend = get_object_or_404(CustomUser, id=user_id)
     # 自分→友達、友達→自分のトークを全て取得
-    talk = Talk.objects.filter(
+    talk = Talk.objects.select_related(
+        "talk_from", "talk_to"
+    ).filter(
         Q(talk_from=user, talk_to=friend) | Q(talk_to=user, talk_from=friend)
     ).order_by("time")
     # 送信form
