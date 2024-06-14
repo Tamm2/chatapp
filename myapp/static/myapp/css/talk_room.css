@@ -13,6 +13,7 @@
     font-size: 1.2rem;
     text-decoration: none;
     position: absolute;
+    top:30px;
     right: 0;
     transform: translateY(-50%);
     margin: auto;
@@ -27,6 +28,7 @@
     font-size: 1.2rem;
     text-decoration: none;
     position: absolute;
+    top:30px;
     left: 0;
     transform: translateY(-50%);
     margin: auto;
