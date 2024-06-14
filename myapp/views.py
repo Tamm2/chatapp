@@ -1,12 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from .forms import CustomSignupForm
-from django.contrib.auth import authenticate,login
-from django.contrib.auth.views import(
-    LoginView,
-    PasswordChangeView,
-)
+from django.contrib.auth.views import PasswordChangeView
 from .forms import (
-    LoginForm,
     TalkForm,
     UsernameSettingForm,
     EmailSettingForm,
@@ -16,19 +10,16 @@ from .forms import (
     FriendSearchForm,
 )
 from django.contrib.auth.decorators import login_required
-from .models import CustomUser
-from .models import Talk
+from .models import CustomUser,Talk,Inquiry
 from django.db.models import Q
 import operator
 from django.urls import reverse_lazy
 from django.contrib.auth import logout
-from .models import Inquiry
-#from allauth.account.views import LoginView as AllauthLoginView
-#from allauth.account.forms import LoginForm
 
 def index(request):
     return render(request, "myapp/index.html")
 
+@login_required
 def friends(request):
     info = []
     info_have_message = []
