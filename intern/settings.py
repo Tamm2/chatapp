@@ -193,3 +193,45 @@ if os.path.isfile('.env'): # .envファイルが存在しない時にもエラ�
 ACCOUNT_FORMS = {
     'signup': 'myapp.forms.CustomSignupForm',
 }
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "standard": {
+            "format": "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            "datefmt": "%d/%b/%Y %H:%M:%S",
+        },
+    },
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        },
+    },
+    "handlers": {
+        "null": {
+            "level": "DEBUG",
+            "class": "logging.NullHandler",
+        },
+        "file": {
+            "level": "INFO",
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": os.path.join(BASE_DIR, 'debug.log'),  # ローカル環境用に変更
+            "maxBytes": 1024 * 1024 * 512,
+            "backupCount": 10,
+            "formatter": "standard",
+        },
+        "console": {"level": "INFO", "class": "logging.StreamHandler", "formatter": "standard"},
+        "mail_admins": {
+            "level": "ERROR",
+            "class": "django.utils.log.AdminEmailHandler",
+            "include_html": True,
+            "filters": ["require_debug_false"],
+        },
+    },
+    "loggers": {
+        "django.security.DisallowedHost": {"handlers": ["null"], "propagate": False},
+        "django": {"handlers": ["file", "console", "mail_admins"], "level": "DEBUG", "propagate": True,},
+        "main": {"handlers": ["file", "console", "mail_admins"], "level": "DEBUG", "propagate": True,},
+    },
+}
