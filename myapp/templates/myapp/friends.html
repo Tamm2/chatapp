@@ -22,7 +22,9 @@
     <div class="friend-indivi">
         <a class="friend-list__link" href="{% url 'talk_room' friend.id %}">
             <li>
+                {% if friend.image %}
                 <img class="friend_usericon" src="{{ friend.image.url }}">
+                {% endif %}
                 <div class="username">
                     {{ friend.username }}:
                 </div>

@@ -1,0 +1,19 @@
+{% load i18n %}
+{% load account %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Sign Up" %}</title>
+</head>
+<body>
+    <a href="{% url 'account_login' %}"> すでにアカウントを持っている方はこちらから</a>
+    <h2>{% trans "Sign Up" %}</h2>
+    <form method="post" action="{% url 'account_signup' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% trans "Sign Up" %}</button>
+    </form>
+</body>
+</html>

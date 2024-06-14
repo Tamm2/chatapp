@@ -1,30 +1,19 @@
 from .models import CustomUser
 from django import forms
-from django.contrib.auth.forms import (
-    UserCreationForm,
-    AuthenticationForm,
-    PasswordChangeForm,
-)
+from django.contrib.auth.forms import PasswordChangeForm
 from .models import Talk
 from django.contrib.auth import get_user_model
+from allauth.account.forms import SignupForm
 
-class newUserForm(UserCreationForm):
-    class Meta:
-        model = CustomUser
-        fields = ("username","email","image")
-    
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if CustomUser.objects.filter(email=email).exists():
-            raise forms.ValidationError('このメールアドレスは既に登録されています。')
-        return email
+class CustomSignupForm(SignupForm):
+    image = forms.ImageField(required=False)
 
-class LoginForm(AuthenticationForm):
-    otp_code = forms.CharField(label="OTP Code", required=False)
-    def clean(self):
-        cleaned_data = super().clean()
-        # OTPの検証ロジックをここに追加
-        return cleaned_data
+    def save(self, request):
+        user = super(CustomSignupForm, self).save(request)
+        user.image = self.cleaned_data['image']
+        user.save()
+        return user
+
 
 
 class TalkForm(forms.ModelForm):
