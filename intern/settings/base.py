@@ -190,6 +190,7 @@ EMAIL_BACKEND = env('EMAIL_BACKEND')
 ##EMAIL_USE_TLS = True
 #EMAIL_HOST_USER = 'apikey'
 #EMAIL_HOST_PASSWORD = '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'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
 if os.path.isfile('.env'): # .envファイルが存在しない時にもエラーが発生しないようにする
